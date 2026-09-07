@@ -2,7 +2,7 @@
 
 [MCP Authorization spec](https://modelcontextprotocol.io/specification/2025-11-25/basic/authorization) and most MCP clients assume a human is present: open a browser, consent, get a token, keep going until the session expires, then repeat. That model breaks as soon as you want an autonomous agent, a CI job, a daemon, or any other long-running process that must talk to an OAuth-protected MCP server with nobody at the keyboard.
 
-**[mcp-client-credentials-auth](https://github.com/velias/mcp-client-credentials-auth)** is a local MCP authentication proxy for that gap. It sits between your MCP client and a remote MCP server, obtains tokens with the OAuth `client_credentials` grant ([MCP OAuth Client Credentials extension](https://modelcontextprotocol.io/extensions/auth/oauth-client-credentials) Draft), and forwards MCP traffic with a Bearer token. Your MCP client keeps talking plain unauthenticated MCP, and the proxy handles authentication.
+**[mcp-client-credentials-auth](https://github.com/redhat-community-ai-tools/mcp-client-credentials-auth)** is a local MCP authentication proxy for that gap. It sits between your MCP client and a remote MCP server, obtains tokens with the OAuth `client_credentials` grant ([MCP OAuth Client Credentials extension](https://modelcontextprotocol.io/extensions/auth/oauth-client-credentials) Draft), and forwards MCP traffic with a Bearer token. Your MCP client keeps talking plain unauthenticated MCP, and the proxy handles authentication.
 
 This post is for two audiences: people who need machine access to a remote MCP server today, and MCP server providers who want a ready client path to recommend for that access.
 
@@ -107,7 +107,7 @@ A few rules of thumb matter more than the feature list:
 - **HTTP mode is one shared machine identity.** All MCP clients reuse the same outbound Bearer token and scopes. It is not a multi-tenant edge, so use separate deployments per trust boundary.
 - **The proxy owns the outbound Authorization header.** Access tokens stay in memory and are never logged, and the local MCP client cannot supply or override the Bearer token used toward the remote server.
 
-More detail is in the repo [Security](https://github.com/velias/mcp-client-credentials-auth#security) section.
+More detail is in the repo [Security](https://github.com/redhat-community-ai-tools/mcp-client-credentials-auth#security) section.
 
 ## For MCP server providers
 
@@ -123,13 +123,13 @@ Users then get secure, long-term, non-interactive service-account access without
 
 If discovery is not available yet, you can still recommend the proxy, but document the necessary settings yourself: the IdP token endpoint URL and the scopes to request (`MCP_CC_PROXY_TOKEN_ENDPOINT` and `MCP_CC_PROXY_SCOPES`). Users cannot discover those without your guidance. Auto-discovery remains the smoother story when you can publish it.
 
-For more detail see [notes for MCP Server Developers](https://github.com/velias/mcp-client-credentials-auth#notes-for-mcp-server-developers)
+For more detail see [notes for MCP Server Developers](https://github.com/redhat-community-ai-tools/mcp-client-credentials-auth#notes-for-mcp-server-developers)
 
 ## Links
 
-- GitHub: [velias/mcp-client-credentials-auth](https://github.com/velias/mcp-client-credentials-auth)
+- GitHub: [redhat-community-ai-tools/mcp-client-credentials-auth](https://github.com/redhat-community-ai-tools/mcp-client-credentials-auth)
 - npm: [mcp-client-credentials-auth](https://www.npmjs.com/package/mcp-client-credentials-auth)
-- Container: `ghcr.io/velias/mcp-client-credentials-auth`
+- Container: `ghcr.io/redhat-community-ai-tools/mcp-client-credentials-auth`
 - Spec: [MCP Authorization](https://modelcontextprotocol.io/specification/2025-11-25/basic/authorization)
 - Spec: [MCP OAuth Client Credentials](https://modelcontextprotocol.io/extensions/auth/oauth-client-credentials)
 

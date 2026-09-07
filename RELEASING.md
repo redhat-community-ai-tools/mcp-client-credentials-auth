@@ -20,18 +20,52 @@ add context, highlight important changes, or remove noise.
 
 ## Prerequisites
 
-- Push access to `main`
+- Permission to open PRs to `main` and **push `v*` tags** (direct pushes to
+  `main` are blocked by branch protection in this org)
 - [GitHub CLI](https://cli.github.com/) (`gh`) installed and authenticated
   (`gh auth login`) -- used by `npm run changelog` to fetch release notes
 - **Trusted Publishing** configured on npmjs.com (see below)
 
 ## Steps
 
+`main` requires changes through a PR. The **version bump** merges via PR; the
+**release** is triggered by pushing a tag (not by pushing to `main`).
+
 1. Ensure `main` is green (CI passing)
 2. Review merged PRs since the last tag -- add/fix labels if needed
-3. Run: `npm version patch|minor|major` (bumps version in package.json,
-   creates git commit + `vX.Y.Z` tag)
-4. Push: `git push origin main --follow-tags`
+3. Bump the version on a branch and open a PR:
+
+   ```bash
+   git checkout main && git pull
+   git checkout -b release/X.Y.Z   # or chore/bump-X.Y.Z
+
+   npm version patch --no-git-tag-version   # or minor|major
+
+   git add package.json package-lock.json
+   git commit -m "chore: bump version to X.Y.Z"
+   git push -u origin HEAD
+   ```
+
+   Open a PR, get CI green, and **merge** to `main`.
+
+   Use `--no-git-tag-version` so `npm version` only edits `package.json` and
+   `package-lock.json`. Do **not** run `npm version patch` without that flag on
+   `main`; it creates a commit and tag locally and `git push origin main` will
+   be rejected.
+
+4. Tag the merged commit on `main` and push **only the tag**:
+
+   ```bash
+   git checkout main && git pull
+   git tag vX.Y.Z
+   git push origin vX.Y.Z
+   ```
+
+   The tag must point at a commit where `package.json` already shows `X.Y.Z`.
+   `release.yml` checks out that commit; `npm publish` uses the version from
+   `package.json` (not the tag name). Keep the tag name and `package.json`
+   version in sync (`v1.2.3` / `1.2.3`).
+
 5. The `release.yml` workflow will automatically:
    - Run lint, test, build
    - Publish to npm via OIDC Trusted Publishing (no token needed)
@@ -41,8 +75,19 @@ add context, highlight important changes, or remove noise.
      `packages: write`; no extra secret)
 6. (Optional) Edit the GitHub Release notes in the UI to curate
 7. Run `npm run changelog` to regenerate `CHANGELOG.md` from all GitHub
-   Releases, then commit and push the result. This can also be re-run later
-   if you edit release notes after the fact.
+   Releases, then open a PR with the result and merge to `main`. This can also
+   be re-run later if you edit release notes after the fact.
+
+### Branch protection pitfalls
+
+- **`git push origin main --follow-tags` fails** -- expected; use the PR +
+  tag-only push flow above.
+- **Tag exists but `main` still shows the old version** -- the version-bump PR
+  did not merge before the tag was pushed. Open a PR to sync `package.json` on
+  `main` (no new tag; the release already shipped from the tag commit).
+- **Squash-merge creates a different commit than the tag** -- normal. The tag
+  may point at an older SHA while `main` has an equivalent squash commit; npm
+  and GHCR are built from the **tag**, not from the tip of `main`.
 
 ## Version guidance
 
@@ -114,16 +159,18 @@ be configured on an existing package.
 
 ### 3. Publish
 
-Follow the normal release steps (tag and push). The workflow will authenticate
-using the `NPM_TOKEN` secret (the OIDC path is not available yet because
-Trusted Publishing is not configured). Once the first publish succeeds:
+Follow the normal release steps (version-bump PR, merge, then tag and push).
+The workflow will authenticate using the `NPM_TOKEN` secret (the OIDC path is
+not available yet because Trusted Publishing is not configured). Once the first
+publish succeeds:
 
 1. Configure Trusted Publishing on npmjs.com (see above)
 2. Delete the `NPM_TOKEN` secret from GitHub
 
 ## Hotfix
 
-Same process from a release branch if needed.
+Same PR + tag process from a release branch if needed (open a PR into `main` or
+into the release branch per your hotfix policy, then tag after merge).
 
 ## Manual publish (emergency)
 

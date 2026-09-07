@@ -44,12 +44,12 @@
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/velias/mcp-client-credentials-auth.git"
+    "url": "https://github.com/redhat-community-ai-tools/mcp-client-credentials-auth.git"
   },
   "bugs": {
-    "url": "https://github.com/velias/mcp-client-credentials-auth/issues"
+    "url": "https://github.com/redhat-community-ai-tools/mcp-client-credentials-auth/issues"
   },
-  "homepage": "https://github.com/velias/mcp-client-credentials-auth#readme",
+  "homepage": "https://github.com/redhat-community-ai-tools/mcp-client-credentials-auth#readme",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.30.0",
     "express": "^5.2.1",

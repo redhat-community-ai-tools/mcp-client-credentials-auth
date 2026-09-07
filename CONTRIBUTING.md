@@ -8,14 +8,14 @@ For architecture, code style, logging, and testing conventions, see [AGENTS.md](
 
 ### Reporting Bugs
 
-- Open a [GitHub issue](https://github.com/velias/mcp-client-credentials-auth/issues) with a clear description.
+- Open a [GitHub issue](https://github.com/redhat-community-ai-tools/mcp-client-credentials-auth/issues) with a clear description.
 - Include steps to reproduce, expected behavior, and actual behavior.
 - Include the Node.js version and OS if relevant.
 - Include MCP Client and its version where the bug appears if relevant.
 
 ### Suggesting Features
 
-- **Features should be discussed before implementation.** Open a [GitHub issue](https://github.com/velias/mcp-client-credentials-auth/issues) describing the use case, proposed behavior, and any alternatives you considered.
+- **Features should be discussed before implementation.** Open a [GitHub issue](https://github.com/redhat-community-ai-tools/mcp-client-credentials-auth/issues) describing the use case, proposed behavior, and any alternatives you considered.
 - Wait for feedback and approval before starting work — this saves everyone's time and avoids rejected PRs.
 
 ### Submitting Pull Requests
@@ -43,7 +43,7 @@ Release notes are auto-generated from merged PRs (see [RELEASING.md](RELEASING.m
 **Prerequisites:** Node.js >= 20, npm
 
 ```bash
-git clone https://github.com/velias/mcp-client-credentials-auth.git
+git clone https://github.com/redhat-community-ai-tools/mcp-client-credentials-auth.git
 cd mcp-client-credentials-auth
 npm install
 ```

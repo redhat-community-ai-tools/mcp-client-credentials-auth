@@ -1,8 +1,8 @@
 # mcp-client-credentials-auth
 
-[![CI](https://github.com/velias/mcp-client-credentials-auth/actions/workflows/ci.yml/badge.svg)](https://github.com/velias/mcp-client-credentials-auth/actions/workflows/ci.yml)
-[![Coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/velias/f550f0ffe68a574a690032088359fef3/raw/mcp-client-credentials-auth-coverage.json)](https://github.com/velias/mcp-client-credentials-auth/actions/workflows/ci.yml)
-[![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/velias/mcp-client-credentials-auth/badge)](https://securityscorecards.dev/viewer/?uri=github.com/velias/mcp-client-credentials-auth)
+[![CI](https://github.com/redhat-community-ai-tools/mcp-client-credentials-auth/actions/workflows/ci.yml/badge.svg)](https://github.com/redhat-community-ai-tools/mcp-client-credentials-auth/actions/workflows/ci.yml)
+[![Coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/velias/f550f0ffe68a574a690032088359fef3/raw/mcp-client-credentials-auth-coverage.json)](https://github.com/redhat-community-ai-tools/mcp-client-credentials-auth/actions/workflows/ci.yml)
+[![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/redhat-community-ai-tools/mcp-client-credentials-auth/badge)](https://securityscorecards.dev/viewer/?uri=github.com/redhat-community-ai-tools/mcp-client-credentials-auth)
 
 This app acts as an MCP server that authenticates to remote OAuth-protected MCP servers using the **client_credentials** grant ([MCP OAuth Client Credentials extension](https://modelcontextprotocol.io/extensions/auth/oauth-client-credentials), [client secrets](https://modelcontextprotocol.io/extensions/auth/oauth-client-credentials#client-secrets) variant). Throughout this document, we refer to it as **the auth proxy**.
 
@@ -128,7 +128,7 @@ Both options need the same OAuth env vars (`MCP_CC_PROXY_REMOTE_MCP_URL`, `MCP_C
 **From source** (clone this repo, then build and run locally):
 
 ```bash
-git clone https://github.com/velias/mcp-client-credentials-auth.git
+git clone https://github.com/redhat-community-ai-tools/mcp-client-credentials-auth.git
 cd mcp-client-credentials-auth
 npm ci && npm run build
 export MCP_CC_PROXY_REMOTE_MCP_URL=https://mcp.example.com/mcp
@@ -152,7 +152,9 @@ npx -y mcp-client-credentials-auth
 
 Prerequisites: Docker or Podman. Podman is used in examples; you can use the `docker` command instead.
 
-Image: `ghcr.io/velias/mcp-client-credentials-auth` with tags `X.Y.Z`, `X.Y`, `X`, and `latest`. Defaults: `TRANSPORT=http`, `LISTEN_HOST=0.0.0.0`, port `8080`. 
+Image: `ghcr.io/redhat-community-ai-tools/mcp-client-credentials-auth` with tags `X.Y.Z`, `X.Y`, `X`, and `latest`. Defaults: `TRANSPORT=http`, `LISTEN_HOST=0.0.0.0`, port `8080`.
+
+Older tags were published under `ghcr.io/velias/mcp-client-credentials-auth`. GHCR does not redirect to the new org namespace, so update to `ghcr.io/redhat-community-ai-tools/mcp-client-credentials-auth` in pull/run commands.
 
 ```bash
 podman run --name mcp-cc-proxy --rm \
@@ -160,7 +162,7 @@ podman run --name mcp-cc-proxy --rm \
   -e MCP_CC_PROXY_REMOTE_MCP_URL=https://mcp.example.com/mcp \
   -e MCP_CC_PROXY_CLIENT_ID=my-service \
   -e MCP_CC_PROXY_CLIENT_SECRET=s3cr3t \
-  ghcr.io/velias/mcp-client-credentials-auth:latest
+  ghcr.io/redhat-community-ai-tools/mcp-client-credentials-auth:latest
 ```
 
 Or pass `--env-file` for credentials.

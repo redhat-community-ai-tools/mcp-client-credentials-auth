@@ -36,7 +36,7 @@ add context, highlight important changes, or remove noise.
    - Run lint, test, build
    - Publish to npm via OIDC Trusted Publishing (no token needed)
    - Create a GitHub Release with auto-generated notes
-   - Build and push a container image to `ghcr.io/velias/mcp-client-credentials-auth`
+   - Build and push a container image to `ghcr.io/redhat-community-ai-tools/mcp-client-credentials-auth`
      with tags `X.Y.Z`, `X.Y`, `X`, and `latest` (uses `GITHUB_TOKEN` /
      `packages: write`; no extra secret)
 6. (Optional) Edit the GitHub Release notes in the UI to curate
@@ -67,7 +67,7 @@ npm. After the first publish (see "First publish" below), configure it:
 2. Under **Publishing access**, click **Add trusted publisher**
 3. Configure:
    - **Provider**: GitHub Actions
-   - **Organization or user**: `velias`
+   - **Organization or user**: `redhat-community-ai-tools`
    - **Repository**: `mcp-client-credentials-auth`
    - **Workflow filename**: `release.yml`
    - **Environment**: leave empty
@@ -107,7 +107,7 @@ be configured on an existing package.
 ### 2. Add as a GitHub secret
 
 1. Go to **GitHub repo > Settings > Secrets and variables > Actions**
-   (https://github.com/velias/mcp-client-credentials-auth/settings/secrets/actions)
+   (https://github.com/redhat-community-ai-tools/mcp-client-credentials-auth/settings/secrets/actions)
 2. Click **New repository secret**:
    - **Name**: `NPM_TOKEN`
    - **Secret**: paste the token value

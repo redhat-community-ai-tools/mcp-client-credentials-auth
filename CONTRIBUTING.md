@@ -40,7 +40,7 @@ Release notes are auto-generated from merged PRs (see [RELEASING.md](RELEASING.m
 
 ## Development Setup
 
-**Prerequisites:** Node.js >= 20, npm
+**Prerequisites:** Node.js >= 22.12, npm
 
 ```bash
 git clone https://github.com/redhat-community-ai-tools/mcp-client-credentials-auth.git

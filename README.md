@@ -125,6 +125,18 @@ Both options need the same OAuth env vars (`MCP_CC_PROXY_REMOTE_MCP_URL`, `MCP_C
 
 #### A. Node / npm (no image)
 
+Prerequisites: Node.js >= 22.12 with npm/npx.
+
+**From the npm registry** (no clone; runs the published [`mcp-client-credentials-auth`](https://www.npmjs.com/package/mcp-client-credentials-auth) package):
+
+```bash
+export MCP_CC_PROXY_TRANSPORT=http
+export MCP_CC_PROXY_REMOTE_MCP_URL=https://mcp.example.com/mcp
+export MCP_CC_PROXY_CLIENT_ID=my-service
+export MCP_CC_PROXY_CLIENT_SECRET=s3cr3t
+npx -y mcp-client-credentials-auth
+```
+
 **From source** (clone this repo, then build and run locally):
 
 ```bash
@@ -136,16 +148,6 @@ export MCP_CC_PROXY_CLIENT_ID=my-service
 export MCP_CC_PROXY_CLIENT_SECRET=s3cr3t
 # optional: MCP_CC_PROXY_LISTEN_HOST / PORT / PATH (defaults: 127.0.0.1:8080/mcp)
 npm run start:http
-```
-
-**From the npm registry** (no clone; runs the published [`mcp-client-credentials-auth`](https://www.npmjs.com/package/mcp-client-credentials-auth) package):
-
-```bash
-export MCP_CC_PROXY_TRANSPORT=http
-export MCP_CC_PROXY_REMOTE_MCP_URL=https://mcp.example.com/mcp
-export MCP_CC_PROXY_CLIENT_ID=my-service
-export MCP_CC_PROXY_CLIENT_SECRET=s3cr3t
-npx -y mcp-client-credentials-auth
 ```
 
 #### B. Container image (GHCR)

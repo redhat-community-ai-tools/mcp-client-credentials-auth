@@ -5,10 +5,20 @@ This file is auto-generated from [GitHub Releases](https://github.com/redhat-com
 
 ---
 
+## [v1.1.2](https://github.com/redhat-community-ai-tools/mcp-client-credentials-auth/releases/tag/v1.1.2) — 2026-10-16
+
+* Runtime dependencies and base image bumps to latest versions to patch security bugs
+* Dev dependencies and GH Actions bumps
+
+
+**Full Changelog**: https://github.com/redhat-community-ai-tools/mcp-client-credentials-auth/compare/v1.1.0...v1.1.2
+
+---
+
 ## [v1.1.1](https://github.com/redhat-community-ai-tools/mcp-client-credentials-auth/releases/tag/v1.1.1) — 2026-09-07
 
 ### Documentation
-* Migration to redhat-community-ai-tools organization by @velias in https://github.com/redhat-community-ai-tools/mcp-client-credentials-auth/pull/19
+* Point project metadata at new redhat-community-ai-tools org repo by @velias in https://github.com/redhat-community-ai-tools/mcp-client-credentials-auth/pull/19
 ### Other Changes
 * Bump the npm_and_yarn group across 1 directory with 2 updates by @dependabot[bot] in https://github.com/redhat-community-ai-tools/mcp-client-credentials-auth/pull/20
 

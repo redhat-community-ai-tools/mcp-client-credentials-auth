@@ -6,6 +6,25 @@ describe('Config', () => {
 
   beforeEach(() => {
     process.env = { ...originalEnv };
+    // Drop ambient credentials so "missing *" cases stay deterministic.
+    delete process.env.MCP_CC_PROXY_REMOTE_MCP_URL;
+    delete process.env.MCP_CC_PROXY_CLIENT_ID;
+    delete process.env.MCP_CC_PROXY_CLIENT_SECRET;
+    delete process.env.MCP_CC_PROXY_TRANSPORT;
+    delete process.env.MCP_CC_PROXY_AUDIT_CALLS;
+    delete process.env.MCP_CC_PROXY_ALLOWED_TOOLS;
+    delete process.env.MCP_CC_PROXY_SCOPES;
+    delete process.env.MCP_CC_PROXY_TOKEN_ENDPOINT;
+    delete process.env.MCP_CC_PROXY_DEBUG;
+    delete process.env.MCP_CC_PROXY_REFRESH_SKEW_SECONDS;
+    delete process.env.MCP_CC_PROXY_REQUEST_TIMEOUT_MS;
+    delete process.env.MCP_CC_PROXY_STARTUP_TIMEOUT_MS;
+    delete process.env.MCP_CC_PROXY_CAPABILITIES_POLL_SECONDS;
+    delete process.env.MCP_CC_PROXY_LISTEN_HOST;
+    delete process.env.MCP_CC_PROXY_LISTEN_PORT;
+    delete process.env.MCP_CC_PROXY_LISTEN_PATH;
+    delete process.env.MCP_CC_PROXY_OAUTH_REDISCOVERY_SECONDS;
+    delete process.env.MCP_CC_PROXY_HTTP_SESSION_IDLE_SECONDS;
   });
 
   afterEach(() => {

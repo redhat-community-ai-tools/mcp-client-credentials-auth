@@ -6,11 +6,11 @@
 
 ## Tech Stack
 
-- **Runtime:** Node.js >= 20
+- **Runtime:** Node.js >= 22.12
 - **Language:** TypeScript 6.x (strict mode, CommonJS output)
 - **MCP SDK:** `@modelcontextprotocol/sdk` (both client and server modules)
 - **Validation:** Zod 4 (`zod/v4` for config validation, `zod/v3` for SDK interop; see SDK upgrade checklist)
-- **Test framework:** Vitest 4
+- **Test framework:** Vitest 5
 - **Linter:** ESLint with typescript-eslint (flat config)
 
 ## Directory Layout

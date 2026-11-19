@@ -12,6 +12,16 @@
 - **Validation:** Zod 4 (`zod/v4` for config validation, `zod/v3` for SDK interop; see SDK upgrade checklist)
 - **Test framework:** Vitest 5
 - **Linter:** ESLint with typescript-eslint (flat config)
+- **Container:** `Dockerfile` multi-stage image from `node:22-alpine` pinned by digest; GHCR image is a shipped artifact (`npm ci` from lockfile)
+
+## Dependency and container updates
+
+When the user asks whether dependency updates are necessary, whether a security/deps release is needed, or to refresh deps for security:
+
+1. **npm packages** -- compare installed/`package-lock.json` versions to latest within declared ranges (`npm outdated`, registry latest). Call out majors (e.g. TypeScript 7, MCP SDK v2) separately as migrations, not routine bumps.
+2. **Docker base image (required)** -- always check the pinned `node:22-alpine@sha256:…` digest on **both** `FROM` lines in `Dockerfile` against the current multi-arch index digest for `node:22-alpine`. Resolve with `skopeo inspect --format '{{.Digest}}' docker://docker.io/library/node:22-alpine` (or `docker`/`podman buildx imagetools inspect` as in CONTRIBUTING.md). Also note Node version / image `Created` on pinned vs latest (`skopeo inspect`). `apk upgrade` in the runtime stage only refreshes Alpine packages at build time; it does **not** move the Node runtime -- a newer digest is required for Node security releases.
+3. **Shipping impact** -- this project ships a container image that runs `npm ci` from the lockfile. Stale lockfile or base digest means published images stay vulnerable until a new tag rebuild. Prefer recommending a patch release when either the lockfile or base digest has security-relevant updates.
+4. **When updating** -- if asked to apply updates, bump both `FROM` digests together when the base is stale, and commit lockfile changes when npm deps moved. See CONTRIBUTING.md "Updating the Docker base image".
 
 ## Directory Layout
 

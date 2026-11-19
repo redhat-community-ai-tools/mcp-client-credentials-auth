@@ -5,6 +5,14 @@ This file is auto-generated from [GitHub Releases](https://github.com/redhat-com
 
 ---
 
+## [v1.1.3](https://github.com/redhat-community-ai-tools/mcp-client-credentials-auth/releases/tag/v1.1.3) — 2026-11-19
+
+* Dependency updates
+
+**Full Changelog**: https://github.com/redhat-community-ai-tools/mcp-client-credentials-auth/compare/v1.1.2...v1.1.3
+
+---
+
 ## [v1.1.2](https://github.com/redhat-community-ai-tools/mcp-client-credentials-auth/releases/tag/v1.1.2) — 2026-10-16
 
 * Runtime dependencies and base image bumps to latest versions to patch security bugs
